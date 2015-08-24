@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 using System.Linq;
-using Xunit.Sdk;
 
 namespace CustomCollections.Net.Tests
 {
@@ -17,10 +16,31 @@ namespace CustomCollections.Net.Tests
         private readonly Dictionary<string, string> _emptySourceItems = new Dictionary<string, string>();
 
         [Fact]
+        public void GetEnumeratorEqualsSourceSetEnumerator()
+        {
+            var underTest = new ReadonlyDictionary<string, string>(_sourceItems);
+            Assert.Equal(_sourceItems.GetEnumerator(), underTest.GetEnumerator());
+        }
+
+        [Fact]
         public void ReadonlyDictionaryEqualsSourceSet()
         {
             var underTest = new ReadonlyDictionary<string, string>(_sourceItems);
             Assert.Equal(_sourceItems.ToList(), underTest.ToList());
+        }
+
+        [Fact]
+        public void ReadonlyDictionaryKeysEqualsSourceSetKeys()
+        {
+            var underTest = new ReadonlyDictionary<string, string>(_sourceItems);
+            Assert.Equal(_sourceItems.Keys.ToList(), underTest.Keys.ToList());
+        }
+
+        [Fact]
+        public void ReadonlyDictionaryValuesEqualsSourceSetValues()
+        {
+            var underTest = new ReadonlyDictionary<string, string>(_sourceItems);
+            Assert.Equal(_sourceItems.Values.ToList(), underTest.Values.ToList());
         }
 
         [Fact]
@@ -50,6 +70,17 @@ namespace CustomCollections.Net.Tests
 
         [Fact]
         public void ReadonlyDictionaryContains()
+        {
+            var underTest = new ReadonlyDictionary<string, string>(_sourceItems);
+            Assert.True(underTest.Contains(new KeyValuePair<string, string>("a", "1")));
+            Assert.True(underTest.Contains(new KeyValuePair<string, string>("b", "2")));
+            Assert.True(underTest.Contains(new KeyValuePair<string, string>("c", "3")));
+            Assert.False(underTest.Contains(new KeyValuePair<string, string>("d", "4")));
+            Assert.False(underTest.Contains(new KeyValuePair<string, string>("", "")));
+        }
+
+        [Fact]
+        public void ReadonlyDictionaryContainsKey()
         {
             var underTest = new ReadonlyDictionary<string, string>(_sourceItems);
             Assert.True(underTest.ContainsKey("a"));
@@ -98,6 +129,7 @@ namespace CustomCollections.Net.Tests
             Assert.Throws<NotSupportedException>(() => underTest.Remove("b"));
             Assert.Throws<NotSupportedException>(() => underTest.Remove(new KeyValuePair<string, string>("b", "b")));
             Assert.Throws<NotSupportedException>(() => underTest.Add("b", "b"));
+            Assert.Throws<NotSupportedException>(() => underTest.Add(new KeyValuePair<string, string>("b", "b")));
             Assert.Throws<NotSupportedException>(() => underTest.Clear());
             Assert.Throws<NotSupportedException>(() => underTest["a"] = "a");
         }
