@@ -1,0 +1,11 @@
+*.opensdf
+*.orig
+*.sdf
+*.suo
+*.user
+*.vspscc
+*.vssscc
+
+[Oo]bj/
+bin/
+packages/
