@@ -15,7 +15,7 @@ namespace CustomCollections.Net
         public ReadonlyDictionary(IDictionary<TKey, TValue> items)
         {
             _dictionary = items;
-            _slotsLength = CustomCollectionsConstants.Primes.FirstOrDefault(_ => IsNoCollision(items, _));
+            _slotsLength = CustomCollectionsHelpers.Primes.FirstOrDefault(_ => IsNoCollision(items, _));
             if (_slotsLength == 0)
             {
                 _isDictionaryFallback = true;
@@ -26,8 +26,8 @@ namespace CustomCollections.Net
 
                 foreach (var item in items)
                 {
-                    _slots[CustomCollectionsConstants.InternalGetHashCode(item.Key) % _slotsLength].Key = item.Key;
-                    _slots[CustomCollectionsConstants.InternalGetHashCode(item.Key) % _slotsLength].Value = item.Value;
+                    _slots[CustomCollectionsHelpers.PositiveHashCode(item.Key) % _slotsLength].Key = item.Key;
+                    _slots[CustomCollectionsHelpers.PositiveHashCode(item.Key) % _slotsLength].Value = item.Value;
                 }
             }
         }
@@ -56,7 +56,7 @@ namespace CustomCollections.Net
         {
             if (!_isDictionaryFallback)
             {
-                var existingItem = _slots[CustomCollectionsConstants.InternalGetHashCode(item.Key) % _slotsLength];
+                var existingItem = _slots[CustomCollectionsHelpers.PositiveHashCode(item.Key) % _slotsLength];
                 return existingItem.Key != null &&
                        item.Key.Equals(existingItem.Key) &&
                        item.Value.Equals(existingItem.Value);
@@ -82,7 +82,7 @@ namespace CustomCollections.Net
         {
             if (!_isDictionaryFallback)
             {
-                var existingItem = _slots[CustomCollectionsConstants.InternalGetHashCode(key) % _slotsLength];
+                var existingItem = _slots[CustomCollectionsHelpers.PositiveHashCode(key) % _slotsLength];
                 return existingItem.Key != null && key.Equals(existingItem.Key);
             }
 
@@ -103,7 +103,7 @@ namespace CustomCollections.Net
         {
             if (!_isDictionaryFallback)
             {
-                var existingItem = _slots[CustomCollectionsConstants.InternalGetHashCode(key) % _slotsLength];
+                var existingItem = _slots[CustomCollectionsHelpers.PositiveHashCode(key) % _slotsLength];
                 value = existingItem.Value;
                 return existingItem.Key != null && key.Equals(existingItem.Key);
             }
@@ -117,7 +117,7 @@ namespace CustomCollections.Net
             {
                 if (!_isDictionaryFallback)
                 {
-                    var existingItem = _slots[CustomCollectionsConstants.InternalGetHashCode(key) % _slotsLength];
+                    var existingItem = _slots[CustomCollectionsHelpers.PositiveHashCode(key) % _slotsLength];
                     if (existingItem.Key != null && key.Equals(existingItem.Key))
                     {
                         return existingItem.Value;
@@ -135,7 +135,7 @@ namespace CustomCollections.Net
 
         private bool IsNoCollision(IDictionary<TKey, TValue> items, int prime)
         {
-            return items.Select(_ => CustomCollectionsConstants.InternalGetHashCode(_.Key) % prime).Distinct().Count() == items.Count;
+            return items.Select(_ => CustomCollectionsHelpers.PositiveHashCode(_.Key) % prime).Distinct().Count() == items.Count;
         }
 
         private struct Entry

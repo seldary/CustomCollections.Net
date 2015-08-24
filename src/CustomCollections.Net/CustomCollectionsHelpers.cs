@@ -1,6 +1,6 @@
 namespace CustomCollections.Net
 {
-    internal static class CustomCollectionsConstants
+    internal static class CustomCollectionsHelpers
     {
         internal static readonly int[] Primes =
         {
@@ -11,7 +11,7 @@ namespace CustomCollections.Net
             1674319, 2009191, 2411033, 2893249, 3471899, 4166287, 4999559, 5999471, 7199369
         };
 
-        internal static int InternalGetHashCode<T>(T item)
+        internal static int PositiveHashCode<T>(T item)
         {
             return item.GetHashCode() & 0x7FFFFFFF;
         }

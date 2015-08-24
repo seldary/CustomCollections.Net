@@ -15,7 +15,7 @@ namespace CustomCollections.Net
         public ReadonlyHashSet(ISet<T> items)
         {
             _hashSet = new HashSet<T>(items);
-            _slotsLength = CustomCollectionsConstants.Primes.FirstOrDefault(_ => IsNoCollision(items, _));
+            _slotsLength = CustomCollectionsHelpers.Primes.FirstOrDefault(_ => IsNoCollision(items, _));
             if (_slotsLength == 0)
             {
                 _isHashSetFallback = true;
@@ -26,7 +26,7 @@ namespace CustomCollections.Net
 
                 foreach (var item in items)
                 {
-                    _slots[CustomCollectionsConstants.InternalGetHashCode(item) % _slots.Length] = item;
+                    _slots[CustomCollectionsHelpers.PositiveHashCode(item) % _slots.Length] = item;
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace CustomCollections.Net
         {
             if (!_isHashSetFallback)
             {
-                var existingItem = _slots[CustomCollectionsConstants.InternalGetHashCode(item)%_slotsLength];
+                var existingItem = _slots[CustomCollectionsHelpers.PositiveHashCode(item)%_slotsLength];
                 return existingItem != null && item.Equals(existingItem);
             }
 
@@ -132,7 +132,7 @@ namespace CustomCollections.Net
 
         private bool IsNoCollision(ISet<T> items, int prime)
         {
-            return items.Select(_ => CustomCollectionsConstants.InternalGetHashCode(_) % prime).Distinct().Count() == items.Count;
+            return items.Select(_ => CustomCollectionsHelpers.PositiveHashCode(_) % prime).Distinct().Count() == items.Count;
         }
     }
 }

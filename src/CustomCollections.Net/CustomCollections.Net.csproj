@@ -37,7 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomCollectionsConstants.cs" />
+    <Compile Include="CustomCollectionsHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadonlyDictionary.cs" />
     <Compile Include="ReadonlyHashSet.cs" />
