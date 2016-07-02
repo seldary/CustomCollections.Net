@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomCollections.Net", "src\CustomCollections.Net\CustomCollections.Net.csproj", "{2FF1D490-98B3-41BC-B0C9-37A75D3475A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomCollections.Net.Tests", "tests\CustomCollections.Net.Tests\CustomCollections.Net.Tests.csproj", "{203101A7-AEB8-4593-84AF-814629C371BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomCollections.Net.Benchmark", "src\CustomCollections.Net.Benchmark\CustomCollections.Net.Benchmark.csproj", "{BA0C497D-80EF-4FCE-9574-EBAEAF015C1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{203101A7-AEB8-4593-84AF-814629C371BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{203101A7-AEB8-4593-84AF-814629C371BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{203101A7-AEB8-4593-84AF-814629C371BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0C497D-80EF-4FCE-9574-EBAEAF015C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0C497D-80EF-4FCE-9574-EBAEAF015C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0C497D-80EF-4FCE-9574-EBAEAF015C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0C497D-80EF-4FCE-9574-EBAEAF015C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
